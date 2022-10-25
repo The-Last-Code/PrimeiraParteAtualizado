@@ -1,22 +1,128 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>
-    <title>Document</title>
-</head>
+<html>
+      
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../View/./bootstrap/css/" />
+    <link rel="stylesheet" href="../View/./bootstrap/app/Views/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="../View/bootstrap/app/Views/bootstrap/css/dataTables.bootstrap5.min.css" />
+    <link rel="stylesheet" href="../View/bootstrap/app/Views/bootstrap/css/home.css" />
+    <title>Scilink</title>
+  </head>
+  
 <body>
+      
+    <!-- input tag -->
+    <input id="searchbar" onkeyup="search_animal()" type="text"
+        name="search" placeholder="Search animals..">
+        <br>
+      
+    <!-- ordered list -->
 
-    <script>
-         swal({
-        title: 'Cadastrado com sucesso!',
-        text: 'Você sera redirecionado...',
-        icon: 'success',
-        button: '',
-      });
-    </script>
-    
+    <table id="lista" class="pub">
+      <tr>
+        <td class="titulo">
+          <a href="./PaginaPublicacao.php" style="text-decoration: none; color: rgb(44, 44, 44);">
+            <h4  >Gato</h4>
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td class="res">
+          <p>
+            <a href="./PaginaPublicacao.php" style="text-decoration: none; color: rgb(3, 3, 3);">
+              gato gato gato gato gato gato gato gato gato gato gato gato 
+      </a>
+            <a href="./PaginaPublicacao.php">Ver Mais</a>
+          </p>
+        </td>
+      </tr>
+        <td class="dt">
+          <div>
+            <p> Data da Publicação: 00/00/0000</p> <p><b> Tags:</b> <span>#LoremIpsum</span> <span>#Lorem</span> <span>#Ipsum</span></p>
+          </div>
+        </td>
+      </table>
+
+
+      <table id="lista" class="animals">
+        <tr>
+          <td class="titulo">
+            <a href="./PaginaPublicacao.php" style="text-decoration: none; color: rgb(44, 44, 44);">
+              <h4 >Peixe</h4>
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td class="res">
+            <p>
+              <a href="./PaginaPublicacao.php" style="text-decoration: none; color: rgb(3, 3, 3);">
+                Peixe  Peixe  Peixe  Peixe  Peixe  Peixe  Peixe  Peixe  Peixe  Peixe 
+        </a>
+              <a href="./PaginaPublicacao.php">Ver Mais</a>
+            </p>
+          </td>
+        </tr>
+          <td class="dt">
+            <div>
+              <p> Data da Publicação: 00/00/0000</p> <p><b> Tags:</b> <span>#LoremIpsum</span> <span>#Lorem</span> <span>#Ipsum</span></p>
+            </div>
+          </td>
+        </table>
+
+        <table id="lista" class="animals">
+          <tr>
+            <td class="titulo">
+              <a href="./PaginaPublicacao.php" style="text-decoration: none; color: rgb(44, 44, 44);">
+                <h4 >Cachorro</h4>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td class="res">
+              <p>
+                <a href="./PaginaPublicacao.php" style="text-decoration: none; color: rgb(3, 3, 3);">
+                  Cachorro Cachorro Cachorro Cachorro Cachorro Cachorro Cachorro Cachorro Cachorro Cachorro
+          </a>
+                <a href="./PaginaPublicacao.php">Ver Mais</a>
+              </p>
+            </td>
+          </tr>
+            <td class="dt">
+              <div>
+                <p> Data da Publicação: 00/00/0000</p> <p><b> Tags:</b> <span>#LoremIpsum</span> <span>#Lorem</span> <span>#Ipsum</span></p>
+              </div>
+            </td>
+          </table>
+
+
+      
+    <!-- linking javascript -->
+    <script src="./animals.js"></script>
 </body>
+
+<script>
+  // JavaScript code
+function search_animal() {
+    let input = document.getElementById('searchbar').value
+    input=input.toLowerCase();
+    let x = document.getElementsByClassName('pub');
+      
+    for (i = 0; i < x.length; i++) { 
+        if (!x[i].innerHTML.toLowerCase().includes(input)) {
+            x[i].style.display="none";
+        }
+        else {
+            x[i].style.display="table";                 
+        }
+    }
+}
+</script>
+  
 </html>

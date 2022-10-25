@@ -5,6 +5,7 @@ include '../Models/Pub.php';
 include '../Controllers/IClientsController.php';
 include '../Controllers/Printar.php';
 include '../Models/UserPerfil.php';
+require_once '../Conection/Conn.php';
 
 class CadastroController{
   
@@ -92,6 +93,7 @@ class CadastroController{
       header('Location: ../View/PaginaPerfil.php');
     }
   }
+
 }
 
 

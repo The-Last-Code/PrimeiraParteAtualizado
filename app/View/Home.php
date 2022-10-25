@@ -1,30 +1,17 @@
 <?php
+    include ('../Dao/Client.php');
+    require_once('../Controllers/clientsController.php');
+    require_once ('../Conection/Conn.php');
+    $controller=new clientsController();
 
-// session_start();
+    $action=!empty($_GET['a'])?$_GET['a']:'getAll';
 
-// if (isset ($_SESSION['certo'])){
+    $controller->{$action}();
 
+    $resultData = $_SESSION['var'];
 
-// }
-// else
-// {
-//   echo ("oi");exit;
-// }
-
-  require_once('../Controllers/clientsController.php');
-
-  $controller=new clientsController();
-
-  $action=!empty($_GET['a'])?$_GET['a']:'getAll';
-
-  $controller->{$action}();
-
-  $resultData = $_SESSION['var'];
-
-
-    
+   
 ?>
-
 <!DOCTYPE php>
 <php lang="en">
   <head>
@@ -39,7 +26,6 @@
     />
     <link rel="stylesheet" href="./bootstrap/app/Views/bootstrap/css/dataTables.bootstrap5.min.css" />
     <link rel="stylesheet" href="./bootstrap/app/Views/bootstrap/css/home.css" />
-    
     <title>Scilink</title>
   </head>
   <body>
@@ -73,19 +59,17 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="topNavBar">
-          <form class="d-flex ms-auto my-3 my-lg-0">
+          <form class="d-flex ms-auto my-3 my-lg-0" method="GET" action="">
             <div class="input-group">
               <input
+                id="searchbar"
                 class="form-control"
-                type="search"
+                type="text"
                 placeholder="Pesquise a tag desejada"
                 aria-label="Search"
+                onkeyup="search_animal()"
               />
-              <button class="btn btn-primary" type="submit"  
-              style="background-color: rgb(50, 216, 0);
-              border: solid 1px rgb(50, 216, 0);">
-                <i class="bi bi-search"></i>
-              </button>
+
             </div>
           </form>
           <ul class="navbar-nav">
@@ -113,7 +97,6 @@
     </nav>
     <!-- top navigation bar -->
     <!-- offcanvas -->
- 
     <div
       class="offcanvas offcanvas-start sidebar-nav bg-dark"
       tabindex="-1"
@@ -173,8 +156,8 @@
       </div>
 
       
-      <?php foreach($resultData as $data): ?> 
-      <table>
+      <?php while($data = $resultData->fetch(PDO::FETCH_ASSOC)){  ?> 
+      <table id="lista" class="pub">
         <tr>
           <td class="titulo">
             <a href="./PaginaPublicacao.php" style="text-decoration: none; color: white;">
@@ -198,15 +181,46 @@
             </div>
           </td>
         </table>
-        <?php endforeach; ?> 
+        <?php }?>
 
+        <script>
+          // JavaScript code
+        function search_animal() {
+            let input = document.getElementById('searchbar').value
+            input=input.toLowerCase();
+            let x = document.getElementsByClassName('pub');
+              
+            for (i = 0; i < x.length; i++) { 
+                if (!x[i].innerHTML.toLowerCase().includes(input)) {
+                    x[i].style.display="none";
+                }
+                else {
+                    x[i].style.display="table";                 
+                }
+            }
+        }
+        </script>
+
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <li class="page-item disabled">
+            <a class="page-link" href="?pg=<?=$anterior?>" tabindex="-1" aria-disabled="true">Previous</a>
+          </li>
+          <li class="page-item"><a class="page-link" href="?pg=1">1</a></li>
+          <li class="page-item"><a class="page-link" href="?pg=2">2</a></li>
+          <li class="page-item"><a class="page-link" href="?pg=3">3</a></li>
+          <li class="page-item"></li>
+            <a class="page-link" href="?pg=<?=$proximo?>">Next</a>
+          </li>
+        </ul>
+    </nav>
     </main>
+
     <script src="./bootstrap/app/Views/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
     <script src="./bootstrap/app/Views/bootstrap/js/jquery-3.5.1.js"></script>
     <script src="./bootstrap/app/Views/bootstrap/js/jquery.dataTables.min.js"></script>
     <script src="./bootstrap/app/Views/bootstrap/js/dataTables.bootstrap5.min.js"></script>
     <script src="./bootstrap/app/Views/bootstrap/js/script.js"></script>
-    
   </body>
 </php>

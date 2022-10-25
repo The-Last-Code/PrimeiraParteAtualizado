@@ -79,6 +79,7 @@ class User extends Cadastro{
         $email_alternativo_cientista=$this->getemail_alternativo_cientista();
         $lattes_cientista=$this->getlattes_cientista();
         $snh_cientista=$this->getsnh_cientista();
+        
 
 
         return $this->setCadastroBanco($nom_cientista,$cpf_cientista,$dtn_cientista
